@@ -1,0 +1,101 @@
+{
+	"common": {
+		"name": "rtl433",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "rtl 433",
+		"titleLang": {
+			"en": "rtl 433",
+			"de": "RTL 433",
+			"ru": "RTL 433",
+			"pt": "rtl 433",
+			"nl": "rtl 433",
+			"fr": "rtl 433",
+			"it": "RTL 433",
+			"es": "rtl 433",
+			"pl": "rtl 433",
+			"zh-cn": "RTL 433"
+		},
+		"desc": {
+			"en": "ioBroker adapter for 433Mhz devices decodable by rtl 433",
+			"de": "ioBroker-Adapter für 433-MHz-Geräte, die mit RTL 433 dekodiert werden können",
+			"ru": "Адаптер ioBroker для устройств 433 МГц, декодируемый по RTL 433",
+			"pt": "Adaptador ioBroker para dispositivos 433Mhz decodificáveis ​​por rtl 433",
+			"nl": "ioBroker-adapter voor 433Mhz-apparaten die decodeerbaar zijn door rtl 433",
+			"fr": "Adaptateur ioBroker pour appareils 433Mhz décodable par RTL 433",
+			"it": "Adattatore ioBroker per dispositivi 433Mhz decodificabile da RTL 433",
+			"es": "Adaptador ioBroker para dispositivos 433Mhz decodificable por rtl 433",
+			"pl": "Adapter ioBroker dla urządzeń 433 MHz dekodowalnych przez RTL 433",
+			"zh-cn": "用于433Mhz设备的ioBroker适配器，可通过rtl 433解码"
+		},
+		"authors": [
+			"Daniel Keller <jobe451@gmail.com>"
+		],
+		"keywords": [
+			"rtl 433",
+			"weather station",
+			"misol",
+			"Fine Offset Electronics"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "build/main.js",
+		"icon": "rtl433.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/jobe451/ioBroker.rtl433/master/admin/rtl433.png",
+		"readme": "https://github.com/jobe451/ioBroker.rtl433/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "weather",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "push",
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=1.4.2"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": [
+		{
+			"_id": "info",
+			"type": "channel",
+			"common": {
+				"name": "Information"
+			},
+			"native": {}
+		},
+		{
+			"_id": "info.connection",
+			"type": "state",
+			"common": {
+				"role": "indicator.connected",
+				"name": "Device or service connected",
+				"type": "boolean",
+				"read": true,
+				"write": false,
+				"def": false
+			},
+			"native": {}
+		}
+	]
+}
