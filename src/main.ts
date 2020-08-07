@@ -43,7 +43,7 @@ class Misol extends utils.Adapter {
 	public constructor(options: Partial<utils.AdapterOptions> = {}) {
 		super({
 			...options,
-			name: "neeo",
+			name: "rtl433",
 		});
 		this.on("ready", this.onReady.bind(this));
 		this.on("objectChange", this.onObjectChange.bind(this));
@@ -137,7 +137,6 @@ class Misol extends utils.Adapter {
 				if (this.openParentCount ===  0) {
 					this.readState = stdInReadState.INBETWEEN_JSON;
 					try {
-						console.log("json")
 						const msg = JSON.parse (this.currentMsg);
 						this.handleData(msg);
 					}
@@ -156,16 +155,40 @@ class Misol extends utils.Adapter {
 		}
 	}
 	
-	private handleData(data: any) {
+	private async handleData(data: any): Promise<void> {
 
 		const path = "devices." + data.model + ".";
 		for (const key in data) {
 			if (key === "model") {
 				continue;
 			}
-			this.setStateAsync(path + key, { val: data[key], ack: true });
+
+			const fullPath = path + key;
+			await this.setObjectAsync(fullPath, {
+				type: "state",
+				common: {
+					name: "name",
+					type: "string",
+					role: "info",
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+			this.setStateAsync(fullPath, { val: data[key], ack: true });
 		}
 
+		await this.setObjectAsync("lastUpdate", {
+			type: "state",
+			common: {
+				name: "name",
+				type: "string",
+				role: "info",
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
 		this.setStateAsync("lastUpdate", { val: data.time, ack: true });
 	}
 	
@@ -187,10 +210,7 @@ class Misol extends utils.Adapter {
 	 * Is called if a subscribed object changes
 	 */
 	private onObjectChange(id: string, obj: ioBroker.Object | null | undefined): void {
-		if (obj) {
-			// The object was changed
-			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-		} else {
+		if (!obj) {
 			// The object was deleted
 			this.log.info(`object ${id} deleted`);
 		}
