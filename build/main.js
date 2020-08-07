@@ -17,7 +17,7 @@ var stdInReadState;
     stdInReadState[stdInReadState["INBETWEEN_JSON"] = 2] = "INBETWEEN_JSON";
     stdInReadState[stdInReadState["KILL"] = 3] = "KILL";
 })(stdInReadState || (stdInReadState = {}));
-const procRestartTimeoutSeconds = 10;
+const procRestartTimeoutSeconds = 60;
 /*
  * Created with @iobroker/create-adapter v1.24.2
  */
@@ -80,7 +80,7 @@ class Misol extends utils.Adapter {
             setTimeout(() => {
                 this.init();
                 console.log("restarting process");
-            }, procRestartTimeoutSeconds);
+            }, procRestartTimeoutSeconds * 1000);
         });
     }
     evalStdInData(data) {

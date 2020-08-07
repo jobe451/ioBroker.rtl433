@@ -7,7 +7,7 @@ enum stdInReadState {
 	KILL,
 }
 
-const procRestartTimeoutSeconds = 10;
+const procRestartTimeoutSeconds = 60;
 
 /*
  * Created with @iobroker/create-adapter v1.24.2
@@ -108,7 +108,7 @@ class Misol extends utils.Adapter {
 			setTimeout(() => {
 				this.init();
 				console.log("restarting process")
-			}, procRestartTimeoutSeconds)
+			}, procRestartTimeoutSeconds * 1000)
 		});
 	}
 	
