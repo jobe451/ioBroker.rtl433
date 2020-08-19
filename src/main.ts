@@ -1,4 +1,5 @@
 import {spawn, ChildProcessWithoutNullStreams} from "child_process";
+import {interpretData} from "./DataInterpretor/interpreteData"
 
 enum stdInReadState {
 	START,
@@ -157,12 +158,13 @@ class Misol extends utils.Adapter {
 	
 	private async handleData(data: any): Promise<void> {
 
-		const path = "devices." + data.model + ".";
-		for (const key in data) {
+		const interpretedData = await interpretData("devices.", data, this);
+		const path = interpretedData.path;
+		
+		for (const key in interpretedData.data) {
 			if (key === "model") {
 				continue;
 			}
-
 			const fullPath = path + key;
 			await this.setObjectAsync(fullPath, {
 				type: "state",
@@ -175,7 +177,7 @@ class Misol extends utils.Adapter {
 				},
 				native: {},
 			});
-			this.setStateAsync(fullPath, { val: data[key], ack: true });
+			this.setStateAsync(fullPath, { val: interpretedData.data[key], ack: true });
 		}
 
 		await this.setObjectAsync("lastUpdate", {
