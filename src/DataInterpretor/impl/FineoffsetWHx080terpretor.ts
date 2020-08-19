@@ -8,12 +8,14 @@ export class FineoffsetWHx080terpretor extends DataInterpretorAbs {
 		} as InterpretedData;
 
 		if (this.data.uv_sensor_id !== undefined) {
-			outData.id = this.data.uv_sensor_id;
+			outData.id = outData.data.uv_sensor_id;
 			outData.name = "Fineoffset-uv-data"
+			delete outData.data.uv_sensor_id;
 		}
 		else {
-			outData.id = this.data.id;
+			outData.id = outData.data.id;
 			outData.name = "Fineoffset-weather-data"
+			delete outData.data.id;
 		}
 
 		outData.path = this.pathPrefix + outData.name + (outData.id !== undefined ? "." + outData.id : "") + ".";
