@@ -15,10 +15,8 @@ const FineoffsetWHx080terpretor_1 = require("./impl/FineoffsetWHx080terpretor");
 function interpretData(pathPrefix, data, adapter) {
     return __awaiter(this, void 0, void 0, function* () {
         if (data.model === "Fineoffset-WHx080") {
-            adapter.log.info("FineoffsetWHx080terpretor interpretor");
             return new FineoffsetWHx080terpretor_1.FineoffsetWHx080terpretor(pathPrefix, data, adapter).getInterpretedData();
         }
-        adapter.log.info("Generic interpretor");
         return new GenericInterpretor_1.GenericDataInterpretor(pathPrefix, data, adapter).getInterpretedData();
     });
 }

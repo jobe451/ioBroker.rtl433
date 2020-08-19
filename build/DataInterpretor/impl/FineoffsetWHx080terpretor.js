@@ -40,6 +40,7 @@ class FineoffsetWHx080terpretor extends DataInterpretorAbs_1.DataInterpretorAbs 
     getLProMMProHour(path) {
         return __awaiter(this, void 0, void 0, function* () {
             const rain_mm_state = yield this.adapter.getStateAsync(path + "rain_mm");
+            this.adapter.log.info("rain_mm_state" + JSON.stringify(rain_mm_state));
             const rain_mm_str = this.getValueFromStateObj(rain_mm_state);
             if (rain_mm_str === undefined) {
                 return undefined;
@@ -47,11 +48,14 @@ class FineoffsetWHx080terpretor extends DataInterpretorAbs_1.DataInterpretorAbs 
             const rain_mm_previous = parseFloat(rain_mm_str);
             const rain_mm_now = parseFloat(this.data.rain_mm);
             if (rain_mm_previous === NaN || rain_mm_now === NaN || rain_mm_now < rain_mm_previous) {
+                this.adapter.log.info("no previous rain");
                 return undefined;
             }
             const time_state = yield this.adapter.getObjectAsync(path + "time");
+            this.adapter.log.info("time_state" + JSON.stringify(rain_mm_state));
             const time_str = this.getValueFromStateObj(time_state);
             if (time_str === undefined) {
+                this.adapter.log.info("no previous time");
                 return undefined;
             }
             const currentTime = new Date(this.data.time + " UTC");
@@ -59,9 +63,11 @@ class FineoffsetWHx080terpretor extends DataInterpretorAbs_1.DataInterpretorAbs 
             const hourDelta = (currentTime.getTime() - previousTime.getTime()) / (1000 * 60 * 60);
             const rainDelta = rain_mm_now - rain_mm_previous;
             if (hourDelta <= 0) {
+                this.adapter.log.info("houre delta " + hourDelta);
                 return undefined;
             }
             const rain_per_hour = rainDelta / hourDelta;
+            this.adapter.log.info("rain per hour logging " + rain_per_hour);
             return rain_per_hour;
         });
     }

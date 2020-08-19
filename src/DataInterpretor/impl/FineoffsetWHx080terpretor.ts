@@ -32,6 +32,7 @@ export class FineoffsetWHx080terpretor extends DataInterpretorAbs {
 
 	private async getLProMMProHour(path: string): Promise<number | undefined> {
 		const rain_mm_state = await this.adapter.getStateAsync(path + "rain_mm");
+		this.adapter.log.info("rain_mm_state" + JSON.stringify(rain_mm_state));
 		const rain_mm_str = this.getValueFromStateObj(rain_mm_state);
 		if (rain_mm_str === undefined) {
 			return undefined
@@ -40,12 +41,15 @@ export class FineoffsetWHx080terpretor extends DataInterpretorAbs {
 		const rain_mm_previous = parseFloat(rain_mm_str);
 		const rain_mm_now = parseFloat(this.data.rain_mm);
 		if (rain_mm_previous === NaN || rain_mm_now === NaN || rain_mm_now < rain_mm_previous) {
+			this.adapter.log.info("no previous rain");
 			return undefined;
 		}
 
 		const time_state = await this.adapter.getObjectAsync(path + "time");
+		this.adapter.log.info("time_state" + JSON.stringify(rain_mm_state));
 		const time_str = this.getValueFromStateObj(time_state);
 		if (time_str === undefined) {
+			this.adapter.log.info("no previous time");
 			return undefined
 		}
 
@@ -56,11 +60,13 @@ export class FineoffsetWHx080terpretor extends DataInterpretorAbs {
 		const rainDelta = rain_mm_now - rain_mm_previous;
 
 		if (hourDelta <= 0) {
+			this.adapter.log.info("houre delta " + hourDelta);
 			return undefined;
 		}
 
 		const rain_per_hour = rainDelta / hourDelta;
 
+		this.adapter.log.info("rain per hour logging " + rain_per_hour);
 		return rain_per_hour;
 	}
 
