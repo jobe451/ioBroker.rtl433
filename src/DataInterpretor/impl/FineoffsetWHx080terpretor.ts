@@ -45,7 +45,7 @@ export class FineoffsetWHx080terpretor extends DataInterpretorAbs {
 			return undefined;
 		}
 
-		const time_state = await this.adapter.getObjectAsync(path + "time");
+		const time_state = await this.adapter.getStateAsync(path + "time");
 		this.adapter.log.info("time_state " + JSON.stringify(time_state));
 		const time_str = this.getValueFromStateObj(time_state);
 		if (time_str === undefined) {

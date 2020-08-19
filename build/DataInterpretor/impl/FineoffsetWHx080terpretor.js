@@ -51,7 +51,7 @@ class FineoffsetWHx080terpretor extends DataInterpretorAbs_1.DataInterpretorAbs 
                 this.adapter.log.info("no previous rain");
                 return undefined;
             }
-            const time_state = yield this.adapter.getObjectAsync(path + "time");
+            const time_state = yield this.adapter.getStateAsync(path + "time");
             this.adapter.log.info("time_state " + JSON.stringify(time_state));
             const time_str = this.getValueFromStateObj(time_state);
             if (time_str === undefined) {
