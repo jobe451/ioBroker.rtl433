@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
+const interpreteData_1 = require("./DataInterpretor/interpreteData");
 var stdInReadState;
 (function (stdInReadState) {
     stdInReadState[stdInReadState["START"] = 0] = "START";
@@ -122,8 +123,9 @@ class Misol extends utils.Adapter {
     }
     handleData(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const path = "devices." + data.model + ".";
-            for (const key in data) {
+            const interpretedData = yield interpreteData_1.interpretData("devices.", data, this);
+            const path = interpretedData.path;
+            for (const key in interpretedData.data) {
                 if (key === "model") {
                     continue;
                 }
@@ -139,7 +141,7 @@ class Misol extends utils.Adapter {
                     },
                     native: {},
                 });
-                this.setStateAsync(fullPath, { val: data[key], ack: true });
+                this.setStateAsync(fullPath, { val: interpretedData.data[key], ack: true });
             }
             yield this.setObjectAsync("lastUpdate", {
                 type: "state",
@@ -152,7 +154,7 @@ class Misol extends utils.Adapter {
                 },
                 native: {},
             });
-            this.setStateAsync("lastUpdate", { val: data.time, ack: true });
+            this.setStateAsync("lastUpdate", { val: interpretedData.data.time, ack: true });
         });
     }
     /**
