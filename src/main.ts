@@ -222,7 +222,7 @@ class Misol extends utils.Adapter {
 	 * Is called if a subscribed state changes
 	 */
 	private onStateChange(id: string, state: ioBroker.State | null | undefined): void {
-		this.log.info(`state ${id} changed: ${state}`);
+		//this.log.info(`state ${id} changed: ${state}`);
 	}
 }
 

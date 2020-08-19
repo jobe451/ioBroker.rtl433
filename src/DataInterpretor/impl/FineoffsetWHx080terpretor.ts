@@ -20,7 +20,7 @@ export class FineoffsetWHx080terpretor extends DataInterpretorAbs {
 
 		outData.path = this.pathPrefix + outData.name + (outData.id !== undefined ? "." + outData.id : "") + ".";
 
-		if (this.data.uv_sensor_id !== undefined) {
+		if (this.data.uv_sensor_id === undefined) {
 			const rain_mm_per_hour = await this.getLProMMProHour(outData.path);
 			if (rain_mm_per_hour !== undefined) {
 				outData.data.rain_mm_per_hour = rain_mm_per_hour;

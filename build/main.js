@@ -182,7 +182,7 @@ class Misol extends utils.Adapter {
      * Is called if a subscribed state changes
      */
     onStateChange(id, state) {
-        this.log.info(`state ${id} changed: ${state}`);
+        //this.log.info(`state ${id} changed: ${state}`);
     }
 }
 if (module.parent) {
