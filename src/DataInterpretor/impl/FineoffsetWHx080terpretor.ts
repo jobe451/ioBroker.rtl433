@@ -32,7 +32,7 @@ export class FineoffsetWHx080terpretor extends DataInterpretorAbs {
 
 	private async getLProMMProHour(path: string): Promise<number | undefined> {
 		const rain_mm_state = await this.adapter.getStateAsync(path + "rain_mm");
-		this.adapter.log.info("rain_mm_state" + JSON.stringify(rain_mm_state));
+		this.adapter.log.info("rain_mm_state " + JSON.stringify(rain_mm_state));
 		const rain_mm_str = this.getValueFromStateObj(rain_mm_state);
 		if (rain_mm_str === undefined) {
 			return undefined
@@ -46,7 +46,7 @@ export class FineoffsetWHx080terpretor extends DataInterpretorAbs {
 		}
 
 		const time_state = await this.adapter.getObjectAsync(path + "time");
-		this.adapter.log.info("time_state" + JSON.stringify(rain_mm_state));
+		this.adapter.log.info("time_state " + JSON.stringify(time_state));
 		const time_str = this.getValueFromStateObj(time_state);
 		if (time_str === undefined) {
 			this.adapter.log.info("no previous time");

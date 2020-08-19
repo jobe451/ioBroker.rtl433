@@ -40,7 +40,7 @@ class FineoffsetWHx080terpretor extends DataInterpretorAbs_1.DataInterpretorAbs 
     getLProMMProHour(path) {
         return __awaiter(this, void 0, void 0, function* () {
             const rain_mm_state = yield this.adapter.getStateAsync(path + "rain_mm");
-            this.adapter.log.info("rain_mm_state" + JSON.stringify(rain_mm_state));
+            this.adapter.log.info("rain_mm_state " + JSON.stringify(rain_mm_state));
             const rain_mm_str = this.getValueFromStateObj(rain_mm_state);
             if (rain_mm_str === undefined) {
                 return undefined;
@@ -52,7 +52,7 @@ class FineoffsetWHx080terpretor extends DataInterpretorAbs_1.DataInterpretorAbs 
                 return undefined;
             }
             const time_state = yield this.adapter.getObjectAsync(path + "time");
-            this.adapter.log.info("time_state" + JSON.stringify(rain_mm_state));
+            this.adapter.log.info("time_state " + JSON.stringify(time_state));
             const time_str = this.getValueFromStateObj(time_state);
             if (time_str === undefined) {
                 this.adapter.log.info("no previous time");
