@@ -191,7 +191,7 @@ class Misol extends utils.Adapter {
 			},
 			native: {},
 		});
-		this.setStateAsync("lastUpdate", { val: data.time, ack: true });
+		this.setStateAsync("lastUpdate", { val: interpretedData.data.time, ack: true });
 	}
 	
 	
