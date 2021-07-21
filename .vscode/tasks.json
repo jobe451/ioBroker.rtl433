@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "watch:ts",
+			"problemMatcher": [
+				"$gulp-tsc"
+			],
+			"group": "build",
+			"label": "npm: watch:ts",
+			"detail": "tsc -p tsconfig.build.json --watch"
+		}
+	]
+}

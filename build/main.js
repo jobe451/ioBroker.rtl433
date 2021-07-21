@@ -141,7 +141,7 @@ class Misol extends utils.Adapter {
                     },
                     native: {},
                 });
-                this.setStateAsync(fullPath, { val: interpretedData.data[key], ack: true });
+                this.setStateAsync(fullPath, { val: interpretedData.data[key].toString(), ack: true });
             }
             yield this.setObjectAsync("lastUpdate", {
                 type: "state",
@@ -154,7 +154,7 @@ class Misol extends utils.Adapter {
                 },
                 native: {},
             });
-            this.setStateAsync("lastUpdate", { val: interpretedData.data.time, ack: true });
+            this.setStateAsync("lastUpdate", { val: interpretedData.data.time.toString(), ack: true });
         });
     }
     /**
