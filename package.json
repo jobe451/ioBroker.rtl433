@@ -1,6 +1,6 @@
 {
   "name": "iobroker.rtl433",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "ioBroker adapter for 433Mhz devices decodable by rtl 433",
   "author": {
     "name": "Daniel Keller",

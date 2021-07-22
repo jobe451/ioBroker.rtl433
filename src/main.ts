@@ -166,7 +166,7 @@ class Misol extends utils.Adapter {
 				continue;
 			}
 			const fullPath = path + key;
-			await this.setObjectAsync(fullPath, {
+			await this.setObjectNotExistsAsync(fullPath, {
 				type: "state",
 				common: {
 					name: "name",
@@ -180,7 +180,7 @@ class Misol extends utils.Adapter {
 			this.setStateAsync(fullPath, { val: interpretedData.data[key].toString(), ack: true });
 		}
 
-		await this.setObjectAsync("lastUpdate", {
+		await this.setObjectNotExistsAsync("lastUpdate", {
 			type: "state",
 			common: {
 				name: "name",
